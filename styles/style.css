@@ -1,0 +1,367 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: "Roboto Light", sans-serif;
+    height: 100vh;
+}
+
+html {
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+:root {
+    --yellow: #FFC60C;
+    --gray: #B1B1B1;
+}
+
+a {
+    transition: color 0.2s linear;
+}
+
+a:hover {
+    color: var(--yellow);
+}
+
+/*********************
+Header
+*********************/
+header {
+    position: fixed;
+    background-color: white;
+    height: 8.4rem;
+    width: 100vw;
+    z-index: 10;
+}
+
+.header__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12rem;
+}
+
+.logo {
+    padding: 2.4rem 0;
+
+    font-family: Inter, sans-serif;
+    font-size: 2.8rem;
+
+    .yellow {
+        color: var(--yellow);
+    }
+}
+
+.nav {
+    width: 41.8rem;
+}
+
+.nav__list {
+    display: flex;
+    justify-content: space-between;
+
+
+    font-size: 1.6rem;
+}
+
+.nav__item {
+    position: relative;
+
+    &:hover {
+        .nav__link {
+            color: var(--yellow);
+
+            &.has-subnav::after,
+            &.has-subnav::before {
+                background-color: var(--yellow);
+            }
+
+            &.has-subnav::after {
+                rotate: -45deg;
+            }
+
+            &.has-subnav::before {
+                rotate: 45deg;
+            }
+        }
+
+        & > .subnav__list {
+            display: inline-block;
+        }
+    }
+}
+
+.has-subnav {
+    position: relative;
+
+    &::after,
+    &::before {
+        content: "";
+        position: absolute;
+        width: 0.8rem;
+        height: 0.15rem;
+        top: 50%;
+
+        background-color: black;
+        border-radius: 5px;
+
+        transition: all 0.2s linear;
+    }
+
+    &::before {
+        right: -1.8rem;
+        rotate: -45deg;
+    }
+
+    &::after {
+        right: -1.3rem;
+        rotate: 45deg;
+    }
+
+}
+
+.nav__link {
+    display: block;
+    padding: 3.3rem 0;
+}
+
+.subnav__list {
+    display: none;
+    position: absolute;
+    top: 99%;
+    left: 0;
+    transform: translate(-25%, 0);
+    width: 15rem;
+    height: 10rem;
+
+    z-index: 1000;
+}
+
+.subnav__link {
+    display: block;
+    padding: 1rem 1rem 0.9rem;
+    background-color: white;
+}
+
+
+/*********************
+Main
+*********************/
+.main {
+    position: relative;
+}
+
+.center {
+    position: fixed;
+
+    top: 8.44rem;
+
+    width: 100vw;
+    height: 75vh;
+
+    background-image: url("../assets/images/main__bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.main__title {
+    position: absolute;
+    width: 51rem;
+    top: 39%;
+    right: 8.3%;
+
+    font-family: Inter, sans-serif;
+    font-weight: 700;
+    font-size: 3.6rem;
+    color: white;
+}
+
+.catalog {
+    position: absolute;
+    z-index: 3;
+    top: calc(10vh + 8.5rem);
+    height: 0;
+    width: calc(100vw - 6.8rem);
+    overflow: hidden;
+    left: 50%;
+    transform: translateX(-50%);
+
+    transition: opacity 0.8s linear, top 0.8s linear;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+
+    font-size: 3.2rem;
+}
+
+.section__left {
+    position: absolute;
+    background-color: white;
+    width: calc(50vw - 3.4rem + 1px);
+    left: 0;
+    top: 100%;
+    bottom: 0;
+
+    transition: top 1.2s linear;
+}
+
+.catalog__list {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 81vh;
+    width: auto;
+}
+
+.catalog__item {
+    display: flex;
+    align-items: center;
+    margin: 5.6rem 4.4rem 7rem;
+    max-height: 23rem;
+    width: calc(100% - 4.4rem * 2);
+    position: absolute;
+
+    top: 100%;
+
+    border: 1px solid #E8E8E8;
+
+    box-shadow: 0 0 0;
+    transition: top 1.2s linear, opacity 1.2s linear, box-shadow 0.3s linear;
+}
+
+.catalog__item:hover {
+    & .catalog-item__title {
+        color: var(--yellow);
+    }
+
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+}
+
+.catalog-item__photo {
+    margin: 1.4rem 2.1rem 1.4rem 4rem;
+    height: 20rem;
+    width: 20rem;
+}
+
+.catalog-item__text {
+    padding-right: 3.8rem;
+}
+
+.catalog-item__title {
+    padding-bottom: 1.6rem;
+
+    font-family: "Roboto Light", sans-serif;
+    font-size: 1.6rem;
+
+    transition: color 0.3s linear;
+}
+
+.catalog-item__subtitle {
+    font-size: 1.4rem;
+    color: var(--gray);
+}
+
+.catalog-item--about {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .catalog-item__subtitle {
+        padding: 3rem 4.4rem 5.2rem 4.5rem;
+    }
+}
+
+.catalog-item--about:hover {
+    cursor: revert;
+    box-shadow: 0 0 0;
+
+    & .catalog-item__title {
+        color: black;
+    }
+}
+
+.catalog-item__top {
+    display: flex;
+    align-items: center;
+    padding: 5.2rem 0 0 4.5rem;
+
+    .catalog-item__title {
+        padding: 0 0 0 1.3rem;
+
+        font-size: 3.6rem;
+        font-weight: 700;
+    }
+}
+
+.catalog-item__ico {
+    width: 4.8rem;
+    height: 4.8rem;
+}
+
+.section__right {
+    position: absolute;
+    background-color: white;
+    right: 0;
+    top: 100%;
+    width: calc(50vw - 3.4rem);
+    height: 40rem;
+    bottom: 0;
+
+    transition: top 0.8s linear;
+
+    padding: 12.2rem 0 12.2rem 9.7rem;
+}
+
+.section-right__text {
+    width: 41rem;
+}
+
+.section-right__title {
+    font-family: Inter, sans-serif;
+    font-size: 3.6rem;
+    font-weight: 700;
+}
+
+.section-right__subtitle {
+    padding-top: 6.5rem;
+
+    font-size: 2.4rem;
+    color: var(--gray);
+}
+
+.footer {
+    position: fixed;
+    bottom: -20%;
+    padding: 3.9rem 0 3.9rem 10.4rem;
+    width: 100%;
+
+    background-color: black;
+
+    font-size: 2rem;
+    color: #D2D2D2;
+
+    z-index: 1000;
+
+    transition: bottom 0.8s linear;
+}
+
+/*
+на больших больше 1440px .catalog top: calc(15vh + 8.5rem); - чтобы красиво смотрелось и сдвинуть текст на центр блока
+ */
